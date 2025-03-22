@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>HTML Tools</title>
+ <style>
+   textarea {
+     width: 96.8%;
+     height: 64vh;
+     outline: none;
+     border: 2px #5553 solid;
+     border-radius: 15px;
+     background-color: transparent;
+     resize: none;
+     padding: 8px;
+     overflow: scroll;
+     azimuth: auto;
+     tab-size: 15px;
+   }
+
+
+   button,
+   label {
+     outline: none;
+     border: 2px #5553 solid;
+     border-radius: 15px;
+     padding: 7px 21px 7px 21px;
+     background-color: transparent;
+     font-size: 14px;
+     cursor: pointer;
+   }
+
+
+   input[type="file"] {
+     visibility: hidden;
+     margin-bottom: 12px;
+     width: 0;
+   }
+
+
+   .divider {
+     width: 5px;
+     height: 20px;
+     margin: 10px;
+   }
+
+
+   #red {
+     background-color: #f55c;
+     font-weight: bold
+   }
+ </style>
+</head>
+<body>
+ <label for="fileinput">Upload</label><input type=file id="fileinput" accept=".html, .mhtml, .txt, .css, .js"> |
+ <button onclick="toDataURL()">HTML to Data URL</button>
+ <button onclick="fromDataURL()">HTML from Data URL</button>
+ <button onclick="runHTML()">Run HTML</button>
+ <button onclick="clearInput()" id=red>Clear</button>
+ <textarea id="input1" placeholder="Paste or write code here..."></textarea>
+</body>
+<script>
+ function toDataURL() {
+   var x = document.getElementById('input1').value
+   document.getElementById('input1').value = "data:text/html;charset=utf-8," + encodeURIComponent(x)
+ }
+
+
+ function fromDataURL() {
+   var x = document.getElementById('input1').value
+   if (x.indexOf("data:text/html;charset=utf-8,") > -1) {
+     document.getElementById('input1').value = decodeURIComponent(x).substring(29)
+   }
+ }
+
+
+ function runHTML() {
+   var x = document.getElementById('input1').value
+   document.head.innerHTML = "<title>HTML Tools - Running</title>"
+   document.body.innerHTML = x;
+ }
+
+
+ oncontextmenu = () => {event.preventDefault()}
+
+
+ document.getElementById('fileinput').addEventListener('change', getFile)
+
+
+ function getFile() {
+   const input = event.target
+   if ('files' in input && input.files.length > 0) {
+     placeFileContent(document.getElementById('input1'), input.files[0])
+   }
+ }
+
+
+ function placeFileContent(target, file) {
+   readFileContent(file).then(content => {
+     target.value = content
+   }).catch(error => console.log(error))
+ }
+
+
+ function readFileContent(file) {
+   const reader = new FileReader()
+   return new Promise((resolve, reject) => {
+     reader.onload = event => resolve(event.target.result)
+     reader.onerror = error => reject(error)
+     reader.readAsText(file)
+   })
+ }
+ function clearInput() {
+   document.getElementById('input1').value = ""
+ }
+</script>
+</html>
+
+
