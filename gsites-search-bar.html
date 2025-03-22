@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <!--[if lt IE 9]><script type="text/javascript">var IE_fix=true;</script><![endif]-->
+   <style>
+     #search-query {
+       min-width: 16rem;
+       max-width: 28rem;
+       height: 3rem;
+       margin: 0 auto;
+       border-radius: 24px;
+       background-color: #FFF;
+       box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+       font-size: 16px;
+       line-height: 24px;
+     }
+
+
+     #search-query-input {
+       width: max;
+       height: 3rem;
+       padding-left: 1.5rem;
+       font-size: 16px;
+       border: 0;
+       color: #000;
+       background-color: transparent;
+       font-family: monospace;
+       cursor: text;
+       text-align: start;
+       overflow: hidden;
+     }
+   </style>
+ </head>
+
+
+ <body>
+   <div id="search-query">
+     <input type="text" id="search-query-input" placeholder="Search..." onkeypress="return searchKeyPress(event);" style="box-shadow:none; border-radius: 16px!important";>
+     </div>
+ </body>
+ <script>
+   function submitSearch() {
+     var siteSearchUrl = 'https://sites.google.com/search/egusd.net/web-dev';
+     var query = document.getElementById("search-query-input").value;
+     var url = siteSearchUrl + "?query=" + query + "&scope=site"
+     if (typeof IE_fix != "undefined") {
+       var referLink = document.createElement("a");
+       referLink.href = url;
+       document.body.appendChild(referLink);
+       referLink.click();
+     }
+     else { window.open(url); } // All other browsers
+   }
+
+
+   function searchKeyPress(e) {
+     // look for window.event in case event isn't passed in
+     e = e || window.event;
+     if (e.keyCode == 13) {
+       submitSearch()
+       return false;
+     }
+     return true;
+   }
+ </script>
+</html>
