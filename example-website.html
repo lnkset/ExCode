@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+ <style type="text/css">
+   @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+
+   * {
+     font-family: "Pixelify Sans", sans-serif;
+     color: #fff;
+   }
+
+
+   body {
+     background-color: #000;
+     overflow: hidden;
+   }
+
+
+   #container {
+     width: 97.1%;
+     height: 89vh;
+     overflow-y: scroll;
+     overflow-x: hidden;
+     word-wrap: break-word;
+     padding: 5px;
+     border: 3px white solid;
+     border-bottom: none;
+   }
+
+
+   #input {
+     width: 74%;
+     height: 1.8rem;
+     float: none;
+     outline: none;
+     border: 3px white solid;
+     background-color: #000;
+     color: #fff;
+     font-size: 18px;
+   }
+
+
+   #input:focus {
+     border: 3px ghostwhite dashed;
+   }
+
+
+   #sendbtn {
+     width: 12%;
+     height: 2.3rem;
+     border: none;
+     margin: none;
+     vertical-align: top;
+     background-color: #fff;
+     color: #000 !important;
+     font-size: 18px;
+     display: inline-flexbox;
+     outline: none;
+   }
+
+
+   #center {
+     text-align: center;
+   }
+
+
+   hr {
+     line-height: 0px;
+     border: 2px white solid;
+     width: 100%;
+   }
+
+
+   a {
+     background-color: #fff;
+     color: #000 !important;
+     border: none;
+     margin: none;
+     padding-left: 3px;
+     padding-right: 3px;
+   }
+ </style>
+</head>
+
+
+<body>
+
+
+ <body>
+   <div id="container">
+     <div id="center">webdev example site</div>
+     <hr>
+     <div id="content">devbot> Welcome to the WebDev Example website! Type 'help' into the input below and press enter or
+       click the <strong>Send</strong> button.<br></div>
+     </div>
+     <button onclick="clearchat()" id="sendbtn">Clear</button><input id="input" onkeypress="checkKeyEnter(event)"><button onclick="send()" id="sendbtn">Send</button>
+ </body>
+ <script type="text/javascript">
+   let content = document.getElementById('content');
+
+
+function send() {
+ var input = document.getElementById('input');
+ var add = input.value;
+ content.innerHTML += `user> ${add}<br>`;
+ input.value = "";
+ input.focus()
+ getfrommsg(add)
+}
+
+
+function checkKeyEnter(e) {
+ e = e || window.event
+ if (e.which == 13) { send() }
+}
+
+
+function clearchat() {
+ content.innerHTML = "dev> Welcome to the WebDev Example website! Type 'help' into the input below and press enter or click the <strong>Send</strong> button.<br>"
+}
+
+
+function getfrommsg(message) {
+ const keywords = ["about", "hello", "help", "this site"]
+ const responses = [
+   "This site is an example of code, and should be treated as such.",
+   "Hello! Type ‘help’ to find searchable keywords.",
+   "Keywords:<br>&emsp;About - Shows the about screen<br>&emsp;Help - Shows the screen of usable keywords (this screen)<br>&emsp;This Site - How the site works",
+   "Using JavaScript, this website gets the text input from the input below, and adds the text to the content window. It then looks in a list named <i>keywords</i> for the new entry, and pastes the corresponding text into the content window. You can clear said content window with the <strong>Clear</strong> button below.",
+   ""
+ ]
+ if (keywords.indexOf(message) > -1) {
+   for (i = 0; i < keywords.length; i++) {
+     if (message == keywords[i]) {
+       var resp = responses[i]
+       content.innerHTML += `dev> ${resp}<br>`;
+       return;
+     }
+   }
+ } else {
+   var resp = "I don't recognize this message";
+   content.innerHTML += `dev> ${resp}<br>`;
+   return;
+ }
+}
+ </script>
+</body>
+<html>
