@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Text Editor</title>
+ <style>
+   textarea {
+     width: 95%;
+     height: 70vh;
+     resize: none;
+     outline: none;
+     border: 2px #5553 solid;
+     border-radius: 15px;
+     padding: 7px 21px 7px 7px;
+     background-color: transparent;
+     font-size: 14px;
+   }
+   * {
+     font-family: monospace, sans-serif;
+   }
+   input[type="file"] {
+     visibility: hidden;
+     margin-bottom: 12px;
+     width: 0;
+   }
+   .input {
+     cursor: text !important;
+   }
+   button,
+   label,
+   input,
+   select {
+     outline: none;
+     border: 2px #5553 solid;
+     border-radius: 15px;
+     padding: 7px 21px 7px 21px;
+     background-color: transparent;
+     font-size: 14px;
+     cursor: pointer;
+   }
+ </style>
+</head>
+<body>
+ <textarea id="content-target" spellcheck="false" autocomplete="off" placeholder="Paste or write text here..."></textarea>
+ <br>
+ <input class="input" type=text id="name" spellcheck="false" autocomplete="off">
+&emsp;Format:
+ <select id="format">
+  <option value=".txt">Plain Text</option>
+  <option value=".js">JavaScript</option>
+  <option value=".html">HTML5</option>
+  <option value=".css">CSS</option>
+</select>
+ <button onclick="txtdown()">Download</button>
+ <br>
+ <label for="input-file">Upload</label><input type="file" id="input-file" onclick="input()">
+ <script>
+   function input() {
+    document.getElementById('a').close()
+  }
+  function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
+  function txtdown() {
+    const textarea = document.getElementById('content-target').value;
+    var name = document.getElementById('name').value + document.getElementById('format').value;
+    if (name.length < 5) {
+      alert("Name must be longer than 1 character")
+    } else {
+      download(name, textarea)
+    }
+  }
+  document.getElementById('input-file').addEventListener('change', getFile)
+  function getFile(event) {
+    const input = event.target
+    if ('files' in input && input.files.length > 0) {
+      placeFileContent(document.getElementById('content-target'), input.files[0])
+    }
+  }
+  function placeFileContent(target, file) {
+    readFileContent(file).then(content => {
+      target.value = content
+    }).catch(error => console.log(error))
+  }
+  function readFileContent(file) {
+    const reader = new FileReader()
+    return new Promise((resolve, reject) => {
+      reader.onload = event => resolve(event.target.result)
+      reader.onerror = error => reject(error)
+      reader.readAsText(file)
+    })
+  }
+ </script>
+</body>
+<html>
+
+
+
