@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+ <style type="text/css">
+   #top-row>button,
+   .arrow {
+     width: 3.19rem;
+     height: 1.2rem;
+   }
+
+   .w-15 {
+     width: 4.2rem
+   }
+   .w-18 {
+     width: 4.5rem
+   }
+   .w-2 {
+     width: 5.1rem
+   }
+   .w-3 {
+     width: 5.9rem
+   }
+   .w-35 {
+     width: 6.6rem
+   }
+   #space {
+     width: 13.4rem
+   }
+
+   button {
+     border: none;
+     height: 2.4rem;
+     width: 2.58rem;
+     border-radius: 5px;
+     background-color: #fff3;
+     margin: 0;
+     outline: none;
+   }
+
+   .hidden {
+     visibility: hidden;
+   }
+
+   body {
+     background-color: #000;
+   }
+ </style>
+</head>
+<body>
+ <blockquote>a</blockquote>
+ <div id="top-row">
+   <button id="escape"></button>
+   <button></button>
+   <button id="browserforward"></button>
+   <button id="reload"></button>
+   <button></button>
+   <button></button>
+   <button></button>
+   <button></button>
+   <button></button>
+   <button></button>
+   <button></button>
+   <button></button>
+ </div>
+ <div>
+   <button id="backquote"></button>
+   <button id="digit1"></button>
+   <button id="digit2"></button>
+   <button id="digit3"></button>
+   <button id="digit4"></button>
+   <button id="digit5"></button>
+   <button id="digit6"></button>
+   <button id="digit7"></button>
+   <button id="digit8"></button>
+   <button id="digit9"></button>
+   <button id="digit0"></button>
+   <button id="minus"></button>
+   <button id="equal"></button>
+   <button class="w-15" id="backspace"></button>
+ </div>
+ <div>
+   <button class="w-15" id="tab"></button>
+   <button id="keyq"></button>
+   <button id="keyw"></button>
+   <button id="keye"></button>
+   <button id="keyr"></button>
+   <button id="keyt"></button>
+   <button id="keyy"></button>
+   <button id="keyu"></button>
+   <button id="keyi"></button>
+   <button id="keyo"></button>
+   <button id="keyp"></button>
+   <button id="bracketleft"></button>
+   <button id="bracketright"></button>
+   <button id="backslash"></button>
+ </div>
+ <div>
+   <button class="w-2"></button>
+   <button id="keya"></button>
+   <button id="keys"></button>
+   <button id="keyd"></button>
+   <button id="keyf"></button>
+   <button id="keyg"></button>
+   <button id="keyh"></button>
+   <button id="keyj"></button>
+   <button id="keyk"></button>
+   <button id="keyl"></button>
+   <button id="semicolon"></button>
+   <button id="quote"></button>
+   <button class="w-18" id="enter"></button>
+ </div>
+ <div>
+   <button class="w-3" id="shiftleft"></button>
+   <button id="keyz"></button>
+   <button id="keyx"></button>
+   <button id="keyc"></button>
+   <button id="keyv"></button>
+   <button id="keyb"></button>
+   <button id="keyn"></button>
+   <button id="keym"></button>
+   <button id="comma"></button>
+   <button id="period"></button>
+   <button id="slash"></button>
+   <button class="w-35" id="shiftright"></button>
+ </div>
+ <div>
+   <button class="w-3" id="controlleft"></button>
+   <button class="w-3" id="altleft"></button>
+   <button id="space"></button>
+   <button id="altright"></button>
+   <button id="controlright"></button>
+ </div>
+ </div>
+ <script type="text/javascript">
+   document.body.onkeydown = (e) => {
+    e = e || window.event
+    eKey = e.code.toString().toLowerCase()
+    var key = document.getElementById(eKey)
+    key.style.backgroundColor = "#88aaff"
+  }
+
+  document.body.onkeyup = (e) => {
+    e = e || window.event
+    eKey = e.code.toString().toLowerCase()
+    document.getElementById(eKey).style.backgroundColor = reload
+  }
+ </script>
+</body>
+</html>
